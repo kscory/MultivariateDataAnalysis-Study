@@ -1,9 +1,11 @@
 # R - Association Rule Mining
-  - dd
+  - titanic
+    - 특정조건에 따라 살아남은 연관 규칙 분석
+  - grocery shopping data
 
 ---
 
-## 예제 1 - titanic 조건에 따라 살아남은 연관 규칙 분석
+## 공통 부분
   ### 1. 모듈 설치 및 라이브러리 사용
   - `arules` : 연관 규칙 분석 패키지
   - `arulesViz` : 시각화를 도와주는 패키지
@@ -21,8 +23,10 @@
   library(arulesViz)
   library(wordcloud)
   ```
+---
 
-  ### 2. 데이터 로드
+## 예제 1 - titanic : 조건에 따라 살아남은 연관 규칙 분석
+  ### 1. 데이터 로드
   - 현재 디렉토리에 있는 데이터 파일을 불러온다.(Session -> Set working directory 에서 상대경로 설정 후 진행)
     - delimeter로 된 파일을 불러오며 "," 로 구분하겠다 하는 것
   - 참고
@@ -42,7 +46,7 @@
 
   ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining_R/picture/ex11.png)
 
-  ### 3. 데이터 변형
+  ### 2. 데이터 변형
   - 이름은 타이타닉의 생존여부와 관련 없으므로 삭제
   - 어린 아이들이 더 많이 살아남았다고 가졍하고 나이를 (adult, children, unknown) 의 세가지 경우로 바꾼다.
   - 그 후 모든 요인들을 Factor 형태로 변형
@@ -51,7 +55,7 @@
     - `as.factor` : 데이터를 factor 의 형태로 변형
     - `as.integer` : 데이터를 int 형태로 변형
 
-  ```python
+  ```bash
   # 이름 삭제 후 모두 가져옴
   titanic_ar <- titanic[,2:5]
 
@@ -76,7 +80,7 @@
   ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining_R/picture/ex12.png)
 
 
-  ### 4. apriori algorithm 적용
+  ### 3. apriori algorithm 적용
   - `apriori(data, parameter, appearance)` 함수 이용
     - data : 분석에 사용할 데이터셋
     - parameter : list로 minimum support, minimum confidence, minimum length(ex> a,b-> 가능, g->h 불가능) 를 지정
@@ -84,7 +88,7 @@
   - `inspect(rules)` : 이를 분석해줌
   - default 세팅을 이용할 수도 있다.
 
-  ```python
+  ```bash
   # apriori 함수 디폴트 값 적용
   rules <- apriori(titanic_ar)
   inspect(rules)
@@ -102,14 +106,13 @@
 
   ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining_R/picture/ex13.png)
 
-  ### 5. 시각화
+  ### 4. 시각화
   - `plot` 함수를 이용하여 데이터를 시각화
   - `plot(rules, method="scatterplot")`
     - 산점도를 그림
     - 내가 가진 데이터를 가지고 연관규칙분석을 했을 때, support confidence 등 전반적인 것을 보여준다
   - `plot(rules, method="graph", control=list(type = "items", alpha = 1))`
     - 그래프를 그림 (동그라미 하나가 규칙, 들어오는 화살표가 조건, 나가는게 결과)
-    - type
   - `plot(rules, method="paracoord", control=list(reorder=TRUE))`
 
   ```python
@@ -122,3 +125,15 @@
   - 적용 결과
 
   ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining_R/picture/ex14.png)
+
+---
+## 예제 2 - Groceries : 쇼핑 연관 규칙 찾기
+  ### 1. 데이터 불러오기
+  -
+
+  ```bash
+  data("Groceries")
+  summary(Groceries)
+  str(Groceries)
+  inspect(Groceries)
+  ```

@@ -124,9 +124,20 @@
     - `Lift = 1` : 조건절과 결과절은 통계적으로 독립 (규칙사이에 유의미한 연관성 없음)
     - `Lift > 1` : 조건절과 결과절은 서로 유용함
     - `Lift < 1` : 서로 함께 나타나지 않음 (거의 없지만 예를 들어 __설사약을 사면 변비약을 산다__ 같은 경우에 나타남)
-    - 예시>
+    - 예시> "noodle 을 구매하면 egg도 구매한다." 에 대한 Lift
+      - Lift=1 이므로 규칙사이에 유의미한 연관성 없음
 
   ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining/picture/associationEx5.png)
 
   ### 3. 결과 분석 예시
-  - ㅇㅇ
+  - 우열을 판단하기 위해서는 모든 지표가 높아야만 한다는 것에 주의하자!
+  - 위의 priori algorithm 예시에서 사용한 데이터 분석
+    - minimum support 는 20%로 설정
+    - confidence 는 70% 로 설정
+  - ex> Rule 1 과 Rule 2 비교
+    - Rule 1이 우위 : 나머지 지표는 같지만 Lift가 높다.
+  - ex2> Rule3 과 Rule 4 비교
+    - 알수없다 : 지표에 따라서 우위가 다르다.
+    - 이는 상황에 따라 다르게 판단해야 한다.
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining/picture/association3.png)

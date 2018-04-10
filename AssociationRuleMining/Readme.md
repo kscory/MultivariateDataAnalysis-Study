@@ -69,19 +69,64 @@
     ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining/picture/association2.png)
 
   ### 2. priori algorithm
-  -
+  - minimum support 값 지정
+  - 이를 만족하는 I 개의 item set 생성(만족하지 못하면 remove후 이 하위집합은 뒤에서 평가하지 않음)
+  - 아래를 반복
+    - I+1 개의 item set을 만들어 이것이 minimum support 를 만족하는지 확인
+    - 만족하지 못한다면 remove(그 후 반복할때 이 하위집합은 평가하지 않음)
 
   ### 3. priori algorithm 예시
-  - ㅇㅇ
+  - 아래의 그림에서 priori algorithm 적용
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining/picture/associationEx.png)
+
+  - minimum support 값을 20%로 지정 후 item set 생성
+
+  ```
+  Support{noodle} = 8/10 = 80%
+  Support{egg} = 5/10 = 50%
+  Support{cola} = 5/10 = 50%
+  Support{rice} = 3/10 = 30%
+  Support{tuna} = 2/10 = 20%
+  Support{onion} = 1/10 = 10% => 최소지지도 만족X 이므로 분석에서 제외
+  ```
+
+  - 2개로 묶인 아이템셋을 만들어 최소 지지도 조건을 만족하는지 확인
+    - {noodle, egg}, {noodle, cola}, {noodle, rice}, {noodle, tuna}, {egg, cola}, {egg, tuna} 가 빈발 아이템 집합이다.
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining/picture/associationEx2.png)
+
+  - 더 이상 아이템 셋이 없을 때까지 위를 반복
+    - 3개로 묶인 아이템 셋을 만들어 확인
+    - 4개로 묶인 아이템 셋을 만들어 확인
+    - ...
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining/picture/associationEx3.png)
 
 ---
 
 ## 규칙 평가
   ### 1. Confidence (신뢰도)
-  - ㅇㅇ
+  - atecedent(조건절) 이 발생했으면서 consequent(결과절) 이 발생할 조건부 확률
+  - benchmark confidence : (비교 대상 신뢰도) 전체 transaction 에서 consequent(결과절)이 발생할 확률
+    - 계산한 confidence 가 비교 대상 신뢰도보다 작으면 규칙으로서 효용 가치는 낮다.
+  - 예시> "noodle 을 구매하면 egg도 구매한다." 에 대한 신뢰도
+    - benchmark confidence : `support(egg) = 0.5`
+    - `confidence(noodle → egg)` 가 P(egg) 보다 작다면 효용가치는 낮다.
 
-  ### 2. Lift (지지도)
-  - ㅇㅇ
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining/picture/associationEx4.png)
+
+  ### 2. Lift (지지도, 향상도)
+  - Lift = Confidence / benchmark confidence
+  - confidence 가 100% 라 해서 항상 좋은 것은 아니며, 의미가 있는지 확인해야 한다.
+    - ex> `술집에서 (감자튀김 -> 맥주)` : confidence=1 이지만 의미가 있는 분석은 아니다.
+  - Lift 결과 설명
+    - `Lift = 1` : 조건절과 결과절은 통계적으로 독립 (규칙사이에 유의미한 연관성 없음)
+    - `Lift > 1` : 조건절과 결과절은 서로 유용함
+    - `Lift < 1` : 서로 함께 나타나지 않음 (거의 없지만 예를 들어 __설사약을 사면 변비약을 산다__ 같은 경우에 나타남)
+    - 예시>
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining/picture/associationEx5.png)
 
   ### 3. 결과 분석 예시
   - ㅇㅇ

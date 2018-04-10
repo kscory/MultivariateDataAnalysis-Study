@@ -14,7 +14,7 @@
     - `dependencies = TRUE` : 의존성이 있으면 모두 설치
     - `library(패키지)` : 인스톨 시킨 패키지를 실행
 
-  ```python
+  ```bash
   install.packages("arules", dependencies = TRUE)
   install.packages("arulesViz", dependencies = TRUE)
   install.packages("wordcloud", dependencies = TRUE)
@@ -33,7 +33,7 @@
     - `str` : 해당하는 데이터의 스트럭쳐를 보여준다.
     - `head` : 데이터를 보여준다.
 
-  ```python
+  ```bash
   # 데이터 로드
   titanic <- read.delim("titanic.txt", dec=",")
   # 데이터 스트럭쳐 보여줌
@@ -80,7 +80,7 @@
   ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining_R/picture/ex12.png)
 
 
-  ### 3. apriori algorithm 적용
+  ### 3. apriori algorithm 을 이용하여 rule 생성
   - `apriori(data, parameter, appearance)` 함수 이용
     - data : 분석에 사용할 데이터셋
     - parameter : list로 minimum support, minimum confidence, minimum length(ex> a,b-> 가능, g->h 불가능) 를 지정
@@ -115,7 +115,7 @@
     - 그래프를 그림 (동그라미 하나가 규칙, 들어오는 화살표가 조건, 나가는게 결과)
   - `plot(rules, method="paracoord", control=list(reorder=TRUE))`
 
-  ```python
+  ```bash
   # 데이터를 plot 함수로 시각화
   plot(rules, method="scatterplot")
   plot(rules, method="graph", control=list(type = "items", alpha = 1))
@@ -128,12 +128,96 @@
 
 ---
 ## 예제 2 - Groceries : 쇼핑 연관 규칙 찾기
-  ### 1. 데이터 불러오기
-  -
+  ### 1. 데이터 불러오기 및 빈도수 구하기
+  - Groceries 데이터를 불러옴
+  - 결과 해석
+    - 9834 X 169 데이터 존재
+    - 흰 우유는 2513 번 구매 ... 등등
+    - 하나만 산 사람(영수증)은 2159개 (하나는 의미 없지만 모수 계산시에 쓰인다.)
+    - 두개 산 영수증은 1643개, 32개(max) 산 영수증은 1개
 
   ```bash
+  # 데이터 불러오기
   data("Groceries")
   summary(Groceries)
   str(Groceries)
   inspect(Groceries)
   ```
+
+  - 적용 결과 (summary 결과)
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining_R/picture/ex21.png)
+
+  ### 2. 빈발 빈도수 차트 그리기(가져오기) - 참고
+  - minimum support 값을 정하여 빈발 아이템의 빈도수를 구할 수 있다.
+
+  ```bash
+  # 빈발 아이템셋 차트 그리기
+  itemFrequencyPlot(Groceries, support = 0.05, cex.names=0.8)
+  ```
+
+  - 적용 결과
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining_R/picture/ex22.png)
+
+  ### 3. apriori algorithm 을 이용하여 rule 생성 및 분석
+  - `minimum support` 를 0.001 , `minimum confidence` 를 0.5 로 설정
+  - 특정 조건에 따라 정렬 가능(ex> lift!!!)
+
+  ```bash
+  # rule 생성
+  rules <- apriori(Groceries, parameter=list(support=0.001, confidence=0.5))
+  rules # 출럭 : 5668
+
+  # lift를 기준으로 앞 3개 출력
+  inspect(head(sort(rules, by="lift"),3))
+  ```
+
+  - 적용 결과
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining_R/picture/ex23.png)
+
+  ### 4. 데이터 꺼내기(csv 파일로 꺼내기) - 참고
+  - 만들어진 규칙을 파일로 뺄 수 있다.
+
+  ```bash
+  # 데이터 csv 로 저장
+  write.csv(as(rules, "data.frame"), "Groceries_rules.csv", row.names = FALSE)
+  ```
+
+  ### 5. 시각화
+  - plot 함수 이용
+
+  ```bash
+  # plot 함수를 이용한 시각화
+  plot(rules)
+  plot(rules, method="grouped")
+  ```
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining_R/picture/ex24.png)
+
+---
+
+## 참고1 - 예제 2 에서 빈도수로 wordcloud 그리기
+  ### 1. 사용할 네임과 빈도수 구하기
+  - `itemLabels` : Groceries 에서 Name 집합을 가져옴
+  - `itemFrequency` : 각각의 네임마다 빈도수를 구함
+
+  ```bash
+  # 사용할 조건 정함
+  itemName <- itemLabels(Groceries)
+  itemCount <- itemFrequency(Groceries)*9835
+  ```
+
+  ### 2. wordcloud 그리기
+  - `brewer.pal` : 칼라 팔레트, 보통 이미 지정되어 있는것을 사용
+  - wordcloud(데이터셋, 빈도수, 최소개수, 글자크기, 색, 랜덤순서)
+    - 글자크기 : scale 로 아래는 최대크기 5, 최소크기 0.2 로 설정
+
+  ```bash
+  # wordcloud 그리기
+  col <- brewer.pal(8, "Dark2")
+  wordcloud(words = itemName, freq = itemCount, min.freq = 1, scale = c(5, 0.2), col = col , random.order = FALSE)
+  ```
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/AssociationRuleMining_R/picture/ex25.png)

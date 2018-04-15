@@ -1,11 +1,10 @@
-# Clustering
-  - Clustering 기본
-  - K-Means Clustering
-  - Hierarchical Clustering
+# Basic Clustering
+  - Clustering 기본 개념
+  - Clustering 고려 사항
 
 ---
 
-## Clustering 기본
+## Clustering 기본 개념
   ### 1. Clustering(군집화) 이란?
   - 전체 데이터 셋 안에서 동질 집단을 찾아내는(판별하는) 분석
   - 군집 내 분산(같은 집단 내 관측치) 최소화
@@ -78,58 +77,50 @@
 
 ## Clustering 고려 사항
   ### 1. 최적의 군집 수 결정
-  - ㅇ
+  - 아래의 그림과 같이 군집을 2개로, 4개로, 6개로 나눌 수 있으며 이에 우열관계는 지표의 성격에 따라 달라지게 된다.
+    - But> 만약 2개, 6개로 나누어야 한다면 아래와 같이 나눠야 함은 틀림없다 !!
+  - 다양한 군집수 대해 성능평가 지표를 이용하여 최적의 군집수를 선택한다.
+  - Elbow point에서 최적 군집수가 자주 결정 된다.
 
-  ### 2. 군집화 결과 평가 방법
-  - ㅇ
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering/picture/consider.png)
 
-  ### 3. 군집화 평가를 위한 세 가지 지표
-  - ㅇ
+  ### 3. 군집화 평가 카테고리
+  - 군집화 결과에 대한 평가는 모든 상황에서 적용 가능한 성능평가 지표가 존재하지 않고 얼마나 유용한지 따지는 타당성 지표가 존재
+  - 세가지 카테고리
+    - External : 정답과 비교를 통해 성능 평가
+    - Internal : 군집이 컴펙트한지(무엇이 더 중요한지)에 초점
+    - Relative : 컴펙트한지, 군집끼리 얼마나 다른지에 초점. 즉, 무엇이 중요한지, 군집기리 서로 얼마나 떨어져 있는지 확인
+
+  ### 4. 군집 타당성 지표 (3가지)
+  - 군집 간 거리
+    - 군집간의 거리는 여러가지가 있지만 가장 __짥은__ 것을 군집간 거리로 설정
+    - 군집간의 거리는 멀수록 잘 분류된 것
+  - 군집의 지름
+    - 군집내에서 가능한 거리는 여러가지가 있지만 가장 __긴__ 것을 군집의 지름으로 설정
+    - 군집의 지름은 짦을 수록 좋다.
+  - 군집의 분산
+    - 군집들이 얼마나 퍼져있는지 확인
+    - 군집의 분산은 작을 수록 좋다.
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering/picture/consider2.png)
 
   ### 4. 군집화 평가 지표 1 - Dunn Index
-  - ㅇ
+  - 군집내 거리 중 가장 작은 것이 분자
+    - 군집화가 잘 되려면 가장 짧은 거리가 멀수록 좋다는 컨셉
+  - 군집의 지름 중 가장 큰 것이 분모
+    - 위와 반대..
+  - 즉, Dunn Index는 __클수록__ 군집화가 잘되었다고 할 수 있다.
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering/picture/consider3.png)
 
   ### 5. 군집화 평가 지표 2 - Silhouette
-  - ㅇ
+  - 개체 수준에서 숫자 계산을 한다.(모든 개체마다 설명하는 작업을 한다.)
+  - `a(i)` : i 라는 개체와 같은 군집 내에 있는 다른 모든 개체들 사이의 평균거리 => 작을수록 좋다.
+  - `b(i)` : i 라는 개체가 속한 군집을 제외하고 다른 군집에 속한 개체들 사이의 평균거리 중 가장 작은 값 => 클수록 좋다.
+  - s(i) 의 경우 이론적으로 `-1 ~ 1`  사이의 값을 가진다. (a(i) 가 1인 경우 최상, b(i) 가 0 인경우 최악)
 
----
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering/picture/silhouette.png)
 
-## K-Means Clustering
-  ### 1. K-Means Clustering 이란?
-  - ㅇㅇ
+  - Silhouette 계산 방법 예시
 
-  ### 2. K-Means Clustering 수행 절차
-  - ㅇㅇ
-
-  ### 3. K-Means Clustering 결과
-  - ㅇㅇ
-
-  ### 4. 초기 Centroid 설정의 중요성
-  - ㅇㅇ
-
-  ### 5. K-Means Clustering의 문제점
-  - ㅇㅇ
-
----
-
-## Hierarchical Clustering
-  ### 1. Hierarchical Clustering 이란?
-  - ㅇ
-
-  ### 2. Hierarchical Clustering 방식
-  - ㅇㅇ
-
-  ### 3. 상향식 Clustering 알고리즘1-유사도/거리 측정
-  - ㅇㅇ
-
-  ### 4. 상향식 Clustering 알고리즘2-Ward's method
-  - ㅇㅇ
-
-  ### 5. Hierarchical Clustering 수행 절차
-  - ㅇㅇ
-
----
-
-## 참고
-  ### 1. K-Means vs Hierarchical
-  - dd
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering/picture/silhouette2.png)

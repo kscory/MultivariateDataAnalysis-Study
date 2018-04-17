@@ -16,16 +16,16 @@
   ### 2. K-Means Clustering 수행 절차
   - K-Means Clustering 의 경우 centroid를 정하고 군집을 할당하는 행위를 반복적으로 수행한 뒤 서로 최적의 값으로 수렴하면 행위를 종료한다.
   - 수행절차
-    - K개(ex> 2개)의 초기 centroid 를 랜덤으로 설정 (빨간색 점)
+    - K개(ex> 2개)의 초기 centroid 를 랜덤으로 설정 (빨간색 점)</br>
   ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/kmeans2.png)
-    - 모든 개체들을 가장 가까운 중심으로 할당 (Expectation 스텝)
+    - 모든 개체들을 가장 가까운 중심으로 할당 (Expectation 스텝)</br>
   ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/kmeans3.png)
-    - 할당된 개체들을 이용하여 군집 중심 재설정 (Maximization 스텝)
-  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/kmeans4.png)
+    - 할당된 개체들을 이용하여 군집 중심 재설정 (Maximization 스텝)</br>
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/kmeans4.png)</br>
     - 다시 모든 개체를 가장 가까운 중심으로 할당
-  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/kmeans5.png)
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/kmeans5.png)</br>
     - 다시 할당된 개체들을 이용하여 군집 중심 재설정
-  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/kmeans6.png)
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/kmeans6.png)</br>
     - 군집 중심과 개체 할당에 변화가 없으므로 알고리즘 종료
 
   ### 3. K-Means Clustering 결과

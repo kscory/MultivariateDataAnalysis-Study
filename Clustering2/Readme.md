@@ -105,4 +105,5 @@
 
 ## 참고
   ### 1. K-Means vs Hierarchical
-  - dd
+  - K-Means 클러스터링의 경우는 군집의 개수를 미리 정해주어야 하지만 Hierarchical 클러스터링은 그렇지 않다.
+  - 반면, Hierarchical 클러스터링은 군집의 유사도를 담을 테이블(메모리)를 미리 필요로 하지만 K-Means 클러스터링은 그렇지 않다.

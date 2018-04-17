@@ -29,13 +29,24 @@
     - 군집 중심과 개체 할당에 변화가 없으므로 알고리즘 종료
 
   ### 3. K-Means Clustering 결과
-  - ㅇㅇ
+  - 초기 중심이 잘 설정된 경우 => 결과가 잘 나옴
+  - 초기 중심이 잘 설정되지 않은 경우 => 이상한 결과가 나옴
+  - 따라서 초기 중심 설정에 따라 다르게 나타난다.
 
-  ### 4. 초기 Centroid 설정의 중요성
-  - ㅇㅇ
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/kmeans7.png)
+
+  ### 4. 초기 Centroid 설정 문제 해결
+  - 가장 간단한 방법 충분히 많은 횟수로 실험한 뒤 자주 나오는 결과물을 최종 결과물로 선택하는 것!
+  - 그 외
+    - 전체 데이터 중 일부만 샘플링하여 계층적 군집화 수행한 후 초기 군집 중심 설정
+    - 데이터 분포의 정보를 사용하여 초기 중심 설정
 
   ### 5. K-Means Clustering의 문제점
-  - ㅇㅇ
+  - 군집의 크기가 다를 경우 제대로 작동하지 않을 수 있다.
+  - 군집의 밀도가 다른 경우 잘 찾아내지 못한다.
+  - 구형이 아닌 데이터 분포가 특이한 케이스도 군집이 잘 이루어지지 않는다.
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/kmeans8.png)
 
 ---
 

@@ -52,19 +52,54 @@
 
 ## Hierarchical Clustering
   ### 1. Hierarchical Clustering 이란?
-  - ㅇ
+  - 계층적 트리모형을 이용하여 개별 개체들을 순차적/계층적으로 유사한 개체 및 그룹과 통합하여 군집화를 수행하는 알고리즘
+  - `Dendrogram` 을 통해 시각화 가능
+    - 덴드로그램을 생성한 후 적절한 수준에서 트리를 자르면 전체 데이터를 몇 개 군집으로 나눌 수 있게 된다.
+  - 계층적 군집화는 사전에 군집의 수를 정하지 않아도 수행 가능 (Dendrogram을 보고 적절하게 나누면 된다.)
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/hierarchical.png)
 
   ### 2. Hierarchical Clustering 방식
-  - ㅇㅇ
+  - 상향식(Agglomerative) 클러스터링
+    - 초기에 모든 개체들을 개별적인 군집으로 가정
+    - 각 단계에서 유사한 개체/군집 끼리 결합하는 과정을 반복하면서 하나의 군집으로 통합되면 완료
+  - 하향식(Divisive) 클러스터링
+    - 모든 개체가 하나의 군집으로 이루어진 상태에서 출발
+    - 각 단계에서 가장 유의미하게 구분되는 지점을 판별하여 지속적으로 데이터를 분할
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/hierarchical2.png)
 
   ### 3. 상향식 Clustering 알고리즘1-유사도/거리 측정
-  - ㅇㅇ
+  - 두 군집 사이의 유사도/거리 측정
+    - __Single linkage__ : (minimum distance) 각 군집에 속한 개체들 사이의 거리중 가장 가까운 값을 군집간 거리로 정의
+    - __Complete linkage__ : (maximum distance) 각 군집에 속한 개체들 사이의 거리중 가장 먼 값을 군집간 거리로 정의
+    - __Average linkage__ : (mean distance) 각 군집에 속한 개체들 사이의 거리 평균값을 군집간 거리로 정의(group)
+    - __Centroid linkage__ : (distance with centroid) 각 군집의 중심간 거리를 군집간 거리로 정의
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/hierarchical3.png)
 
   ### 4. 상향식 Clustering 알고리즘2-Ward's method
-  - ㅇㅇ
+  - 두 군집간의 거리를 군집이 병합된 이후의 Sum of Squared Error (SSE) 와 개별 군집의 SSE의 합과 차이로 정의
+  - 예시
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/hierarchical4.png)
 
   ### 5. Hierarchical Clustering 수행 절차
-  - ㅇㅇ
+  - 군집간 거리 행렬을 만들어 유사도(거리) 가 가장 가까운것끼리 이어가는 작업을 반복하면서 Dendrogram을 만든다.
+    - 모든 개체에 대한 군집간 거리 행렬 계산
+    ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/hierarchical5.png)
+    - 가장 가까운 두 개의 군집을 하나의 군집으로 통합
+    ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/hierarchical6.png)
+    - 군집간 거리 행렬 업데이트
+    ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/hierarchical7.png)
+    - (반복) 가장 가까운 두 개의 군집을 하나의 군집으로 통합
+    ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/hierarchical8.png)
+    - (반복) 군집간 거리 행렬 업데이트
+    ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/hierarchical9.png)
+    - (반복) 가장 가까운 두 개의 군집을 하나의 군집으로 통합
+    ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/hierarchical10.png)
+    - 모든 개체가 하나의 군집이 되었으므로 종료
+    ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/Clustering2/picture/hierarchical11.png)
 
 ---
 

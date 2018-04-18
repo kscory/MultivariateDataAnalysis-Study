@@ -18,10 +18,10 @@
 > - titanic Survived 분석 / Groceries 분석
 > - 사용 패키지 : arules / arulesViz / wordcloud
 
-### 2. [R - Clustering 1](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/tree/master/Clustering-R)
+### 2. [R - Clustering 1](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/tree/master/Clustering_R)
 > - K-Means Clustering
-> - 사용 패키지 : clValid / plotrix
+> - 사용 패키지 및 모듈 : kmeans / clValid / plotrix
 
-### 2. [R - Clustering 2](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/tree/master/Clustering-R_2)
+### 2. [R - Clustering 2](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/tree/master/Clustering_R_2)
 > - Hierarchical Clustering
-> - 사용 패키지 : clValid / plotrix
+> - 사용 패키지 : hclust / clValid /

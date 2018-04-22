@@ -161,14 +161,14 @@
     - 상대적인 오차를 추정하는데 주로 사용됨
     - 제조업에서 spec 을 만들때 주로 이용된다.(불량품)
 
-  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/eva2.png)
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/eval2.png)
 
   ### 4. (Root) Mean squared error ((R)MSE)
   - 부호의 영향을 제거하기 위해 제곱을 취함
   - 연구관점에서 미분이 가능하다는 장점 존재
   - 실제는 보통 절댓값을 이용
 
-  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/eva3.png)
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/eval3.png)
 
 ---
 

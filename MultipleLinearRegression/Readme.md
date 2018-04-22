@@ -174,10 +174,26 @@
 
 ## 분석 예시
   ### 1. 데이터
-  - ㅇ
+  - 아래와 같이 중고차 가격에 대한 정보가 존재
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/ex.png)
 
   ### 2. 전처리
-  - ㅇㅇ
+  - Fuel type이 number 가 아니므로 이를 쪼개서 넣어주는 작업을 수행
+  - 즉, C=1-D-P 와 같이 생각
+  - 그 후 학습용, 검증용 데이터를 나눠 수행
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/ex2.png)
 
   ### 3. 결과
-  - ㅇㅇ
+  - 회기계수(Coefficient)
+    - β 값을 의미
+    - 해당 변수가 1 단위 증가할 때 종속 변수의 변화량을 의미
+    - 양수이면 양의상관관계, 음수이면 음의 상관관계
+    - H0 는 β =0 값으로 만약 그렇다면 선형회귀분석에 유효하지 않다는 것을 의미
+  - p-value
+    - 해당 변수가 통계적으로 유의미한지 알려주는 지표
+    - 0에 가까울수록 모델링에 중요한 변수, 1에 가까울 수록 유의미하지 않은 변수라는 의미
+    - 유의수준(α) 을 설정하여 해당 미만의 변수만을 이용하여 다시 선형회귀분석을 구축하기도 함 (주로 α=0.05)
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/ex3.png)

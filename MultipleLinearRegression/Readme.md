@@ -134,7 +134,7 @@
     - y축 : 실제 잔차가 가지는 값 (실제 데이터 값)
     - 여기서 잔차가 벗어나는 구간이 정규분포를 따르지 않는다고 보며, 이 값이 99% 등을 정하고 이에 틀어졌을 경우 정규분포를 따르지 않는다고 가정한다.
 
-  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/mode2.png)
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/model2.png)
 
 ---
 

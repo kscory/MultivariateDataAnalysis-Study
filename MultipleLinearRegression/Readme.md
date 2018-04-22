@@ -116,13 +116,25 @@
 
 ## 모델 적합도(Model fit) 평가
   ### 1. 모형의 검토
-  - dd
+  - 예측변수와 반응변수 간 관계가 선형인지.
+  - 오차항들이 서로 독립인지,
+  - 오차항의 평균이 0이며 분산이 일정한 정규분포를 따르는지 검토
 
   ### 2. Residual Plot
-  - ㅇㅇ
+  - 종속변수 Y에 대한 잔차(Residual) 는 설명변수 값의 범위에 관계없이 일정함(homoskedasticity)을 유지하는지 평가
+  - (a) 의 경우 특정 pattern 을 보이고 있음을 알 수 있으며, 따라서 가정을 만족시키지 못한다.
+  - (d) 의 경우 설명변수 값의 범위에 관계없이 일정함을 유지하고 있다는 것을 알 수 있다.
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/model.png)
 
   ### 3. 잔차의 정규성
-  - ㅇㅇ
+  - `Histogram` : 잔차가 얼마나 정규성을 따르는지 파악 가능 (easy..)
+  - `QQ Plot`
+    - x축 : 데이터가 정규분포를 따른다 했을 때 가지는 값
+    - y축 : 실제 잔차가 가지는 값 (실제 데이터 값)
+    - 여기서 잔차가 벗어나는 구간이 정규분포를 따르지 않는다고 보며, 이 값이 99% 등을 정하고 이에 틀어졌을 경우 정규분포를 따르지 않는다고 가정한다.
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/mode2.png)
 
 ---
 

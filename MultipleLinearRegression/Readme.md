@@ -139,18 +139,45 @@
 ---
 
 ## 회귀분석 성능 평가
+  ### 0. 들어가기 전에..
+  - 회귀분석을 수행할 때 보통 전체 데이터 중 70%는 학습용 데이터, 30%는 예측데이터로 사용한다.
+  - data
+    - `Trn`(학습용 데이터) : 모델을 만들 때 사용, R² 는 이를 확인하는 작업(학습용 data를 평가하는 것)
+    - `Tst` : 실제 확인할 때 사용
+  - 즉, 학습용 데이터의 결과가 예측 데이터를 얼마나 잘 예측하는지 평가한다.
+
   ### 1. Average error
-  - dd
+  - 실제 값에 비해 과대/과소 추정 여부를 판단
+  - 단, 부호로 인해 잘못된 결론 내릴 위험 존재
 
-  ### 2. Mean absolute error (MAE)
-  - dd
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/eval.png)
 
-  ### 3. Mean absolute percentage error (MAPE)
-  - dd
+  ### 2. Mean absolute error (MAE) vs Mean absolute percentage error (MAPE)
+  - MAE
+    - 실제 값과 예측 값 사이의 절대적인 오차의 평균을 이용
+    - 추천 system 과 같이 퍼센테이지가 중요하지 않은 곳에 사용된다.
+  - MAPE
+    - 실제값 대비 얼마나 예측 값이 차이가 있는지를 % 로 표현
+    - 상대적인 오차를 추정하는데 주로 사용됨
+    - 제조업에서 spec 을 만들때 주로 이용된다.(불량품)
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/eva2.png)
 
   ### 4. (Root) Mean squared error ((R)MSE)
-  - dd
+  - 부호의 영향을 제거하기 위해 제곱을 취함
+  - 연구관점에서 미분이 가능하다는 장점 존재
+  - 실제는 보통 절댓값을 이용
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/eva3.png)
 
 ---
 
-## 예시
+## 분석 예시
+  ### 1. 데이터
+  - ㅇ
+
+  ### 2. 전처리
+  - ㅇㅇ
+
+  ### 3. 결과
+  - ㅇㅇ

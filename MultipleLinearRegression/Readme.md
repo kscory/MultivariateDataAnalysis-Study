@@ -67,17 +67,50 @@
 ---
 
 ## 회귀모형의 적합도(Goodness-of-fit) : (Adjusted) R²
-  ### 1. Sum-of-Squares Decomposition
-  - dd
+  ### 1. 회귀계수 __β__ 의 최적해 판단
+  - 판단 방법
+    - 오차항 ε 이 정규분포를 따름 => but> 거의 맞지 않음
+    - 설명변수와 종속변수 사이에 선형관계가 성립 => but> 실제로 선형관계가 성립하고 있는지 알 방법 없음
+    - 각 관측치들은 서로 독립 => but> 위와 동일
+    - 종속변수 Y 에 대한 오차항(residual, 잔차)은 설명변수 값의 범위에 관계없이 일정함
+  - 따라서 __β__ 가 쓸만한지, 즉 얼마나 적합한지(선형을 따르는지)에 대한 __적합도__ 를 판단하게 된다.
+
+  ### 2. Sum-of-Squares Decomposition
+  - SST : total sum of squares about mean
+    - 실제치와 평균이 얼마나 차이가 나는지를 보여주는 총변동의 개념
+  - SSR : regression sum of squares
+    - 추정치와 평균과의 차이의 제곱
+    - X로 Y의 변동을 설명하는 정도를 측정
+  - SSE : residual(error) sum of squares
+    - 실제치와 추정치의 차이의 제곱 (잔차의 제곱)
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/gof.png)
 
   ### 2. 결정계수 : R²
-  - ㅇㅇ
+  - 반응변수 `Y`의 전체 변동 중 예측변수 `X`가 차지하는 변동의 비율
+    - 종속변수의 변동을 독립변수의 변동으로 얼마나 설명 가능한지 측정한 것
+    - 높을수록 좋은 모델
+  - 해석 (R² 의 범위 : `0 ≤ R² ≤ 1`)
+    - `R² = 1` : 회귀직선으로 Y의 총 변동이 완전히 설명됨 (모든 점이 회귀 직선 위에 존재)
+    - `R² = 0` : 추정된 회귀직선은 X와 Y의 관계를 전혀 설명하지 못함
 
-  ### 3. 그래프적인 해석
-  - ㅇㅇ
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/gof2.png)
 
-  ### 4. 수정 결정 계수 : (Adjusted) R²
-  - ㅇㅇ
+  ### 3. 수정 결정 계수 : (Adjusted) R²
+  - R² 의 경우 유의하지 않은 변수가 추가 될때마다 점점 커지는 문제점이 존재
+  - Adjusted R² 은 penalty 를 부과하여 이르 보정
+  - 즉, penalty를 상쇄하기 위해서는 변수를 추가했을때 SSE 의 감소량이 유의미 해야 한다는 것을 뜻함.
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/gof3.png)
+
+  ### 4. 결론
+  - `R²` 가 1에 가까울수록 이 변수들은 __선형성__ 이 크다.
+  - 여기서 절대로 __모형을 잘 만들었다__ 라고 생각해서는 안된다.
+    - R² 값은 data 에 따라 달라질 뿐, 분석을 잘한것이 절대 아니다.
+    - 단순히 회귀식이 잘 나온 것 뿐이다.
+  - 즉, data 가 선형성을 따르는지 아닌지만 판단하도록 한다.
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression/picture/gof4.png)
 
 ---
 

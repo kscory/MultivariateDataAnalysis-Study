@@ -133,28 +133,24 @@
     - 선형성을 띄다가 점점 틀어지는 것을 볼 수 있다.
     - 이것이 언제 틀어지냐에 따라 정규분포를 따르는 지 알 수 있다. (99%를 만족하려면  `+- 1.96` 밖에서 틀어지는지 확인)
     - 아래 그림의 경우 +2, -2 정도에서 틀어지므로 99% 이상의 신뢰수준으로 __가정을 만족__ 한다고 생각할 수 있다.
-  - 나머지 그림은 그냥... 보도록 한다. (2개 더 존재)
-
-
-  ```bash
-  plot(mlr_corolla)
-  ```
-
-  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression_R/picture/visual1.png)
-
-  - 실제 데이터와 추정된 값 사이의 관계 확인
+  - 그림 3 : 실제 데이터와 추정된 값 사이의 관계 확인
     - `x축` : 실제 데이터(y)
     - `y축` : 추정된 값(y^)
     - 아래 그림을 보게 되면 __선형성이 큰 것__ 을 확인할 수 있다.
     - 참고 : `xlim` : x축의 범위, `ylim` : y축의 범위
 
+
   ```bash
+  # 그림 1 및 그림 2 (그 외에도 2개 더 있지만 나중에.)
+  plot(mlr_corolla)
+
+  # 그림3
   plot(corolla_trn_data$Price, fitted(mlr_corolla),
        xlim = c(4000,35000), ylim = c(4000,35000))
   abline(0,1,lty=3) # 선을 그림
   ```
 
-  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression_R/picture/visual2.png)
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression_R/picture/visual1.png)
 
 ---
 ## 정규성 판단 및 성능 평가

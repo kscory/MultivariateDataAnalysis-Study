@@ -224,3 +224,35 @@
   - RSME : (의미분석 어려움!!)
 
   ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression_R/picture/performance.png)
+
+---
+## 참고 - 보스턴 집값에 관한 데이터의 경우
+  ### 1. 선형 회귀 결과
+  - `R²` 값이 `0.7` 로 선형성이 덜하다.
+  - 잔차와의 관계
+    - 그림 1 : 추정된값(x) 에 상관없이 잔차(Y) 가 __uniform 하지 않다__ (2차항 그래프랑 비슷)
+    - 그림 2 : 굉장히 빠르게 틀어지고 있다. (30~40% 정도 정규분포를 따르지 않을 것이다.)
+    - 그림 3 : 선형에서 떨어진 것들이 많이 보인다.
+    - 그림 4 : 아래의 코드로 잔차를 확인한 결과 잔차가 큰 것을 알 수 있다.
+
+  ```bash
+  plot(fitted(mlr_boston), resid(mlr_boston),
+       xlab="Fitted values", ylab="Residuals")
+  ```
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression_R/picture/visual2.png)
+
+  ### 2. 정규성 확인
+  - 그림을 보면 상대적으로 정규분포를 따르지 않는 것처럼 보인다.
+  - `skewness` 은 `1.6` 으로 0보다 매우 크다
+  - `kurtosis` 은 `8.6` 으로 3보다 매우 크다
+  - 즉, 엄밀하게 말하면 이 데이터는 선형회기 분석이 가져야 하는 가정을 만족하지 못한다고 생각할 수 있다. (회귀분석으로 분석하기는 부적합한 데이터이다.)
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression_R/picture/hist2.png)
+
+  ### 3. 성능 평가
+  - MAE : 차이는 `3.834064` 정도 난다.
+  - MAPE : 오차가 `19.2762` 로 거의 20% 정도 발생
+
+  ### 4. 결론
+  - 보스턴 집에 대한 데이터는 __선형회귀분석으로 적합하지 않다.__

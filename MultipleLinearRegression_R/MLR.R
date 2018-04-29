@@ -76,6 +76,11 @@ skewness(corolla_resid)
 kurtosis(corolla_resid)
 
 # 3. 잔차를 이용해 히스토그램과 커브 생성
+hist(corolla_resid, density=20, breaks=50, prob=TRUE, 
+     xlab="x-variable", main="normal curve over histogram")
+curve(dnorm(x, mean=m, sd=std), 
+      col="darkblue", lwd=2, add=TRUE, yaxt="n")
+
 
 # =====성능 평가===== #
 
@@ -84,7 +89,20 @@ pref_eval_reg <- function(tgt_y, pre_y){
   # RMSE
   rmse <- sqrt(mean((tgt_y - pre_y)^2))
   # MAE
-  mae <- sqrt(mean(abs(tgt_y-pre_y)))
+  mae <- mean(abs(tgt_y - pre_y))
   # MAPE
   mape <-  100*mean(abs((tgt_y - pre_y)/tgt_y))
+  
+  return(c(rmse, mae, mape))
 }
+
+# 2. 성능평가에 대한 데이터 초기화
+perf_mat <- matrix(0, nrow = 1, ncol = 3)
+rownames(perf_mat) <- c("Toyota Corolla")
+colnames(perf_mat) <- c("RMSE", "MAE", "MAPE")
+perf_mat
+
+# 3. 성능 평가 수행
+mlr_corolla_haty <- predict(mlr_corolla, newdata = corolla_val_data) # 검증용 데이터에 대한 추정값 생성
+perf_mat[1,] <- pref_eval_reg(corolla_val_data$Price, mlr_corolla_haty) # 검증용 데이터와 추정된 데이터에 대한 성능 평가
+perf_mat

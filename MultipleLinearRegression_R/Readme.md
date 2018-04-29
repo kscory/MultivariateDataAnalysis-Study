@@ -99,7 +99,7 @@
   - `Estimate` : 회귀 계수의 값
     - `+` 인 경우 양의 비례 관계, `-` 인 경우 음의 비례 관계
     - 1 만큼 증가함에 따라 종속변수가 변하는 량
-    - ex> 마력(HP)의 경우 1이 증가할때마다 20(유로)가 증가
+    - ex> 마력(HP)의 경우 1이 증가할때마다 20 만큼 증가
   - `Std.Error` : 추정된 회귀 계수의 표준편차
   - `t-value` : 해당 변수의 유의미함에 대한 통계량
   - `Adjusted R-squared` : 회귀식의 선형성
@@ -178,7 +178,7 @@
   ```
 
 ---
-## 2. 성능 평가
+## 성능 평가
   ### 1. 성능평가를 위한 함수 생성
   - RMSE, MAE, MAPE 를 만들어주는 함수 생성
   - `tgt_y` 은 정답벡터, `pre_y` 는 추정된 값을 넣어서 확인
@@ -191,6 +191,36 @@
     mae <- mean(abs(tgt_y - pre_y))
     # MAPE
     mape <- 100*mean(abs((tgt_y - pre_y)/tgt_y))
+
     return(c(rmse, mae, mape))
   }
   ```
+
+  ### 2. 성능평가에 대한 행렬 초기화
+  - 한개의 데이터셋, 세개의 평가를 만든다.
+
+  ```bash
+  perf_mat <- matrix(0, nrow = 1, ncol = 3)
+  rownames(perf_mat) <- c("Toyota Corolla")
+  colnames(perf_mat) <- c("RMSE", "MAE", "MAPE")
+  perf_mat
+  ```
+
+  ### 3. 성능 평가 수행
+  - 머신러닝 관점에서 보는 성능평가
+  - 이 데이터가 새로운 데이터를 얼마나 잘 관측하는지에 대해 평가함
+  - `predict` : 만들어진 회귀식을 가지고 새로운 데이터의 값을 예측
+  - 그 후 추정된 데이터가 실제 데이터를 얼마나 잘 예측했는지 검증
+
+  ```bash
+  mlr_corolla_haty <- predict(mlr_corolla, newdata = corolla_val_data) # 검증용 데이터에 대한 추정값 생성
+  perf_mat[1,] <- pref_eval_reg(corolla_val_data$Price, mlr_corolla_haty) # 검증용 데이터와 추정된 데이터에 대한 성능 평가
+  perf_mat
+  ```
+
+  ### 4. 결과 분석
+  - MAE : 평균적으로 자동차 가격을 예측하는데 있어 __814 유로정도 틀린다.__
+  - MAPE : 평균 대비 __8% 틀린다__ (오차가 8% 정도 난다.)
+  - RSME : (의미분석 어려움!!)
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression_R/picture/performance.png)

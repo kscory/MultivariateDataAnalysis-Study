@@ -2,17 +2,10 @@
 install.packages("moments")
 library(moments)
 
-setwd("C:/workspaces/multivariate/Study/MultipleLinearRegression_R") # 파일 경로 지
+setwd("C:/workspaces/multivariate/Study/MultipleLinearRegression_R") # 파일 경로 지정
 
-# 성능 평가를 위한 함수 정의
-pref_eval_reg <- function(tgt_y, pre_y){
-  # RMSE
-  rmse <- sqrt(mean((tgt_y - pre_y)^2))
-  # MAE
-  mae <- sqrt(mean(abs(tgt_y-pre_y)))
-  # MAPE
-  mape <-  100*mean(abs((tgt_y - pre_y)/tgt_y))
-}
+
+# =====다중 선형 회귀 분석===== #
 
 # 1. 데이터 로드 및 전처리
 
@@ -70,6 +63,28 @@ plot(corolla_trn_data$Price, fitted(mlr_corolla),
      xlim = c(4000,35000), ylim = c(4000,35000))
 abline(0,1,lty=3) # 선을 그림
 
-# 5. 정규성 판단
 
-# 6. 성능 평가
+# =====정규성 판단===== #
+
+# 1. 잔차에 대한 평균과 표준편차 계산
+corolla_resid <- resid(mlr_corolla)
+m <- mean(corolla_resid)
+std <- sqrt(var(corolla_resid))
+
+# 2. moment 패키지를 이용한 정규성 판단
+skewness(corolla_resid)
+kurtosis(corolla_resid)
+
+# 3. 잔차를 이용해 히스토그램과 커브 생성
+
+# =====성능 평가===== #
+
+# 1 성능 평가를 위한 함수 정의
+pref_eval_reg <- function(tgt_y, pre_y){
+  # RMSE
+  rmse <- sqrt(mean((tgt_y - pre_y)^2))
+  # MAE
+  mae <- sqrt(mean(abs(tgt_y-pre_y)))
+  # MAPE
+  mape <-  100*mean(abs((tgt_y - pre_y)/tgt_y))
+}

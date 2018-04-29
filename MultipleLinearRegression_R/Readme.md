@@ -13,23 +13,6 @@
   install.packages("moments")
   library(moments)
   ```
-
-  ### 2. 성능평가를 위한 함수 생성
-  - RMSE, MAE, MAPE 를 만들어주는 함수 생성
-  - `tgt_y` 은 정답벡터, `pre_y` 는 추정된 값을 넣어서 확인
-
-  ```python
-  perf_eval_reg <- function(tgt_y, pre_y){
-    # RMSE
-    rmse <- sqrt(mean((tgt_y - pre_y)^2))
-    # MAE
-    mae <- mean(abs(tgt_y - pre_y))
-    # MAPE
-    mape <- 100*mean(abs((tgt_y - pre_y)/tgt_y))
-    return(c(rmse, mae, mape))
-  }
-  ```
-
 ---
 
 ## Multiple Linear Regression
@@ -125,15 +108,14 @@
   ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression_R/picture/lm.png)
 
   ### 5. 시각화 및 결과 분석
-  - 가정을 만족하는지 확인
-  - 그림 1 : 추정된 값과 잔차 사이의 관계
+  - `그림 1` : 추정된 값과 잔차 사이의 관계
     - 추정된 값과 잔차는 상관관계가 없어야 한다. (특정한 trend 가 존재하지 않아야 한다.)
     - 아래 그림에서 종속변수 Y에 대한 잔차는 설명 변수 값의 범위에 관계없이 일정하므로 __가정을 만족__ 한다고 생각할 수 있다.
-  - 그림 2 : QQ-plot
+  - `그림 2` : QQ-plot
     - 선형성을 띄다가 점점 틀어지는 것을 볼 수 있다.
     - 이것이 언제 틀어지냐에 따라 정규분포를 따르는 지 알 수 있다. (99%를 만족하려면  `+- 1.96` 밖에서 틀어지는지 확인)
     - 아래 그림의 경우 +2, -2 정도에서 틀어지므로 99% 이상의 신뢰수준으로 __가정을 만족__ 한다고 생각할 수 있다.
-  - 그림 3 : 실제 데이터와 추정된 값 사이의 관계 확인
+  - `그림 3` : 실제 데이터와 추정된 값 사이의 관계 확인
     - `x축` : 실제 데이터(y)
     - `y축` : 추정된 값(y^)
     - 아래 그림을 보게 되면 __선형성이 큰 것__ 을 확인할 수 있다.
@@ -153,9 +135,62 @@
   ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression_R/picture/visual1.png)
 
 ---
-## 정규성 판단 및 성능 평가
-  ### 1. 정규성 판단
-  - ㅇㅇ
+## 정규성 판단
+  ### 1.  잔차에 대한 평균과 표준편차 계산
+  - 위에서 계산한 잔차를 가지고 평균과 표준편차를 계산한다.
 
-  ### 2. 성능 평가
-  - ㅇㅇ
+  ```bash
+  corolla_resid <- resid(mlr_corolla) # 잔차를 가져옴
+  m <- mean(corolla_resid)            # 평균
+  std <- sqrt(var(corolla_resid))     # 표준편차
+  ```
+
+  ### 2. 잔차를 이용해 히스토그램과 커브 생성
+  - `hist` : 히스토그램을 그림
+  - `curve` : 커브를 그림
+  - `dnorm` : 평균, 표준편차를 이용해서 데이터를 만든다.
+  - 결론
+    - 이 그림은 정규분포를 따른다고 가정할 수 있다.
+    - 만약, 틀어져 있다면 가정을 만족하지 않다고 생각할 수 있다.
+
+  ```bash
+  hist(corolla_resid, density=20, breaks=50, prob=TRUE, # 잔차(corolla_resid)를 가지고 / 음영처리를 20 (100이 밝음) / 막대(density)를 50개 / 함수를 True
+       xlab="x-variable", main="normal curve over histogram") # x축 label 명 : x-variable / title은 normal curve over histogram
+
+  curve(dnorm(x, mean=m, sd=std), #  평균은 m, 표준편차는 std 인 x 를 만든다
+        col="darkblue", lwd=2, add=TRUE, yaxt="n") # 폭은 2 / add= true : 원래 그림에 갖다 붙여라
+  ```
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression_R/picture/hist.png)
+
+  ### 3. moment 패키지를 이용한 (엄밀한) 정규성 판단
+  - `skewness` : 중심을 파악하며 정규분포의 경우 __0__ 에 가까워야 한다.
+  - `kurtosis` : 뾰족한 정도를 파악하며 정규분포의 경우 __3__ 에 가까워야 한다.
+  - 결과
+    - 중심 :  `-0.14`
+    - 뾰족한 정도 :  `8.63`
+    - 즉, 이 데이터의 경우 __대칭성을 가지고__ 있는 정규분포에는 가깝지만 __뾰족한 정도는 맞지 않는다.__
+    - but> 이를 너무 따지게 되면 실제 적용할 데이터는 거의 존재하지 않는다.
+
+  ```bash
+  skewness(corolla_resid) # 중심 파악
+  kurtosis(corolla_resid) # 뾰족한 정도 파악
+  ```
+
+---
+## 2. 성능 평가
+  ### 1. 성능평가를 위한 함수 생성
+  - RMSE, MAE, MAPE 를 만들어주는 함수 생성
+  - `tgt_y` 은 정답벡터, `pre_y` 는 추정된 값을 넣어서 확인
+
+  ```python
+  perf_eval_reg <- function(tgt_y, pre_y){
+    # RMSE
+    rmse <- sqrt(mean((tgt_y - pre_y)^2))
+    # MAE
+    mae <- mean(abs(tgt_y - pre_y))
+    # MAPE
+    mape <- 100*mean(abs((tgt_y - pre_y)/tgt_y))
+    return(c(rmse, mae, mape))
+  }
+  ```

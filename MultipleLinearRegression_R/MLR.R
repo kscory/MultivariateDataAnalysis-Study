@@ -23,7 +23,7 @@ nVar <- nrow(corolla) # 열 갯수 반환
 
 # 1-2. 필요없는 변수 제거
 id_idx <-c(1,2)
-corrlla_del <- corolla[-c(id_idx)]
+corrlla_del <- corolla[,-c(id_idx)]
 
 # 1-3. 카테고리형(명목형) 변수를 이진형 변수로 변환
 
@@ -45,4 +45,20 @@ dummy_c[c_idx] <- 1
 Fuel <- data.frame(dummy_p, dummy_d, dummy_c)
 names(Fuel) <- c("Petrol","Diesel","CNG")
 
-# 1-4. 
+## 생성한 이진형 데이터프레임을 적용하여 데이터 변경
+category_idx <- 6 # 카테고리 변수 인덱스
+corolla_mlr_data <- cbind(corrlla_del[,-c(category_idx)], Fuel)
+
+# 2. 학습용 데이터와 검증용 데이터 분할
+set.seed(12345) # 학습용 데이터를 일정하게 뽑음
+corolla_trn_idx <- sample(1:nCar, round(0.7*nCar)) # 학습용 데이터 인덱스 샘플링
+corolla_trn_data <- corolla_mlr_data[corolla_trn_idx,] # 학습용 데이터
+corolla_val_data <- corolla_mlr_data[-corolla_trn_idx,] # 검증용 데이터
+
+# 3. 학습용 데이터를 이용한 회귀 분석
+
+# 4. 시각화 및 결과 해석
+
+# 5. 정규성 판단
+
+# 6. 성능 평가

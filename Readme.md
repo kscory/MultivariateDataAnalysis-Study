@@ -10,6 +10,9 @@
 ### 3. [K-Means / Hierarchical Clustering](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/tree/master/Clustering2)
 > - K 평균 클러스터링 / 계층적 클러스터링
 
+### 4. [Multiple Linear Regression](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/tree/master/MultipleLinearRegression)
+> - 다중 회귀 분석
+
 ---
 
 ## R 실습
@@ -18,10 +21,14 @@
 > - titanic Survived 분석 / Groceries 분석
 > - 사용 패키지 : arules / arulesViz / wordcloud
 
-### 2. [R - Clustering 1](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/tree/master/Clustering_R)
+### 2. [R - K-Means Clustering 1](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/tree/master/Clustering_R)
 > - K-Means Clustering
 > - 사용 패키지 및 모듈 : kmeans / clValid / plotrix
 
-### 2. [R - Clustering 2](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/tree/master/Clustering_R_2)
+### 3. [R - Hierarchical Clustering 2](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/tree/master/Clustering_R_2)
 > - Hierarchical Clustering
-> - 사용 패키지 : hclust / clValid /
+> - 사용 패키지 및 모듈 : hclust / clValid /
+
+### 4. [R - Multiple Linear Regression](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/tree/master/MultipleLinearRegression_R)
+> - MultipleLinearRegression
+> - 사용 패키지 및 모듈  : moment

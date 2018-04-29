@@ -1,5 +1,5 @@
 # R - Multiple Linear Regression
-  - Multiple Linear Regression with R
+  - Toyota Corolla : 중고차 가격 예측에 대한 회귀분석
 
 ---
 
@@ -32,7 +32,7 @@
 
 ---
 
-## Multiple Linear Regression - Toyota Corolla : 중고차 가격 예측
+## Multiple Linear Regression
   ### 1. 데이터 로드 및 전처리
   - 데이터 로드 및, 행/열 갯수 확인
 
@@ -117,16 +117,49 @@
     - `+` 인 경우 양의 비례 관계, `-` 인 경우 음의 비례 관계
     - 1 만큼 증가함에 따라 종속변수가 변하는 량
     - ex> 마력(HP)의 경우 1이 증가할때마다 20(유로)가 증가
+  - `Std.Error` : 추정된 회귀 계수의 표준편차
+  - `t-value` : 해당 변수의 유의미함에 대한 통계량
   - `Adjusted R-squared` : 회귀식의 선형성
-    - 이 데이터의 경우 90% 의 선형성을 띈다. (즉, 이 데이터는 높은 선형성을 지니고 있다.)
+    - 이 데이터의 경우 90% 의 선형성을 띈다. (즉, 이 데이터는 __높은 선형성__ 을 지니고 있다.)
 
   ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression_R/picture/lm.png)
 
-  ### 4. 시각화 및 결과 분석
+  ### 5. 시각화 및 결과 분석
+  - 가정을 만족하는지 확인
+  - 그림 1 : 추정된 값과 잔차 사이의 관계
+    - 추정된 값과 잔차는 상관관계가 없어야 한다. (특정한 trend 가 존재하지 않아야 한다.)
+    - 아래 그림에서 종속변수 Y에 대한 잔차는 설명 변수 값의 범위에 관계없이 일정하므로 __가정을 만족__ 한다고 생각할 수 있다.
+  - 그림 2 : QQ-plot
+    - 선형성을 띄다가 점점 틀어지는 것을 볼 수 있다.
+    - 이것이 언제 틀어지냐에 따라 정규분포를 따르는 지 알 수 있다. (99%를 만족하려면  `+- 1.96` 밖에서 틀어지는지 확인)
+    - 아래 그림의 경우 +2, -2 정도에서 틀어지므로 99% 이상의 신뢰수준으로 __가정을 만족__ 한다고 생각할 수 있다.
+  - 나머지 그림은 그냥... 보도록 한다. (2개 더 존재)
+
+
+  ```bash
+  plot(mlr_corolla)
+  ```
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression_R/picture/visual1.png)
+
+  - 실제 데이터와 추정된 값 사이의 관계 확인
+    - `x축` : 실제 데이터(y)
+    - `y축` : 추정된 값(y^)
+    - 아래 그림을 보게 되면 __선형성이 큰 것__ 을 확인할 수 있다.
+    - 참고 : `xlim` : x축의 범위, `ylim` : y축의 범위
+
+  ```bash
+  plot(corolla_trn_data$Price, fitted(mlr_corolla),
+       xlim = c(4000,35000), ylim = c(4000,35000))
+  abline(0,1,lty=3) # 선을 그림
+  ```
+
+  ![](https://github.com/Lee-KyungSeok/MultivariateDataAnalysis-Study/blob/master/MultipleLinearRegression_R/picture/visual2.png)
+
+---
+## 정규성 판단 및 성능 평가
+  ### 1. 정규성 판단
   - ㅇㅇ
 
-  ### 5. 정규성 판단
-  - ㅇㅇ
-
-  ### 6. 성능 평가
+  ### 2. 성능 평가
   - ㅇㅇ

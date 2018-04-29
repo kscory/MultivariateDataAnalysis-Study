@@ -56,8 +56,19 @@ corolla_trn_data <- corolla_mlr_data[corolla_trn_idx,] # 학습용 데이터
 corolla_val_data <- corolla_mlr_data[-corolla_trn_idx,] # 검증용 데이터
 
 # 3. 학습용 데이터를 이용한 회귀 분석
+mlr_corolla <-lm(Price ~ ., data = corolla_trn_data)
+mlr_corolla
+summary(mlr_corolla)
 
-# 4. 시각화 및 결과 해석
+# 4. 시각화
+
+# 4-1. 가정을 만족하는지 확인
+plot(mlr_corolla)
+
+# 4-2. 실제 데이터와 추정된 값 사이의 관계 확인
+plot(corolla_trn_data$Price, fitted(mlr_corolla), 
+     xlim = c(4000,35000), ylim = c(4000,35000))
+abline(0,1,lty=3) # 선을 그림
 
 # 5. 정규성 판단
 
